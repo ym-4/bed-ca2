@@ -1,10 +1,22 @@
 {
+  "scripts": {
+  "test": "npm run init_tables && jest --forceExit",
+  "init_tables": "node src/configs/createSchema.js && node src/configs/initTables.js",
+  "test:server": "concurrently \"npm run dev\" \"npm run test -- playwright.test.js --json --outputFile='test_results.json'\" --kill-others --success first",
+  "dev": "nodemon index.js"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "concurrently": "^9.2.1",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "jest": "^30.2.0",
     "jsonwebtoken": "^9.0.3",
-    "mysql2": "^3.16.0",
+    "mysql2": "^3.16.1",
+    "playwright": "^1.58.0",
+    "supertest": "^7.2.2"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.11"
   }
 }

@@ -1,0 +1,135 @@
+/* =========================
+   Cozy Petshop Color Theme
+   ========================= */
+
+:root {
+  /* Backgrounds */
+  --bg-main: #FAF7F2;
+  --bg-card: #FFFFFF;
+  --bg-soft: #F1E7DB;
+
+  /* Brand */
+  --primary: #665240;
+  --primary-hover: #8A6A4E;
+  --secondary: #F2B37E;
+  --secondary-soft: #F7D3AE;
+
+  /* Accents */
+  --accent-green: #8FB6A0;
+  --accent-green-soft: #DDEBE4;
+
+  /* Text */
+  --text-main: #3E342B;
+  --text-muted: #7A6A5C;
+  --text-light: #A89A8E;
+}
+
+/* =========================
+   Global
+   ========================= */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  color: var(--text-main);
+}
+
+/* Muted text override */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* =========================
+   Navbar
+   ========================= */
+.navbar {
+  background-color: var(--primary) !important;
+}
+
+.navbar-brand img.logo {
+  height: 40px;
+}
+
+.navbar .nav-link {
+  color: #FFF !important;
+  opacity: 0.9;
+}
+
+.navbar .nav-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Register button */
+.navbar .btn {
+  background-color: var(--secondary);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 6px 14px;
+  border: none;
+}
+
+.navbar .btn:hover {
+  background-color: var(--secondary-soft);
+}
+
+/* =========================
+   Main Content
+   ========================= */
+main {
+  min-height: 70vh;
+}
+
+/* Cards / list items (used by Pokémon list) */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  color: var(--primary);
+}
+
+.card-text {
+  color: var(--text-muted);
+}
+
+/* =========================
+   Buttons
+   ========================= */
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--text-main);
+  border: none;
+}
+
+/* =========================
+   Footer
+   ========================= */
+footer.bg-primary {
+  background-color: var(--primary) !important;
+  color: #FFF;
+}
+
+footer a {
+  color: var(--secondary-soft);
+}
+
+footer a:hover {
+  color: #FFF;
+}
