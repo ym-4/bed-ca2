@@ -10,7 +10,11 @@ module.exports.preTokenGenerate = (req, res, next) => {
 // EXAMPLE CONTROLLER FOR BEFORE SENDING TOKEN
 //////////////////////////////////////////////////////
 module.exports.beforeSendToken = (req, res, next) => {
-    res.locals.message = `Token is generated.`;
+    res.status(200).json({
+        token: res.locals.token,
+        userId: res.locals.userId, 
+        message: `Token is generated.`
+    });
     next();
 }
 

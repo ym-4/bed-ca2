@@ -68,8 +68,8 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         ('john23', 'john23@email.com', '${hash}', 120, 2),
         ('ben10', 'ben10@email.com', '${hash}', 45, 3),
         ('doe9', 'doe9@email.com', '${hash}', 300, 4),
-        ('seville2', 'seville2@email.com', '${hash}', 10, 6),
-        ('dday6', 'dday6@email.com', '${hash}', 4322, null);
+        ('dave2', 'davidsv2@email.com', '${hash}', 10, 6),
+        ('dday6', 'dday6@email.com', '${hash}', 43, null);
 
         INSERT INTO WellnessChallenge (creator_id, description, points)
         VALUES
@@ -86,7 +86,9 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         (2, 1, 'Hit 5200 steps by evening yay'),
         (1, 2, 'Helped a friend'),
         (3, 3, 'Decided to finish tasks early'),
+        (3, 5, 'Decided to finish tasks early'),
         (4, 1, 'I had balanced meal today'),
+        (2, 5, 'I can do this all day'),
         (5, 3, 'I slept early last night');
 
         CREATE TABLE PetBreeds (
@@ -131,11 +133,11 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
 
         INSERT INTO PetBreeds (breed_name, description, required_points)
         VALUES
-        ('Fluffy Cat', 'A gentle digital cat that represents calmness.', 0),
-        ('Sausage Dog', 'A playful dog that encourages daily activity.', 50),
-        ('Zen Turtle', 'Helps promote mindfulness and slow living.', 120),
+        ('Happy Hippo', 'A gentle digital moo deng that represents calmness.', 0),
+        ('Playful Puppy', 'A playful dog that encourages daily activity.', 50),
+        ('Heroic Platypus', 'A semi-aquatic, egg-laying mammal of action that helps promote mindfulness and slow living.', 120),
         ('Frilly Axolotl', 'Induces longevity in its owner by means of being a familiar', 1000000),
-        ('Phoenix Bird', 'A legendary creature unlocked by high wellness mastery.', 250);
+        ('Silly Duck', 'A legendary creature unlocked by high wellness mastery.', 250);
 
         INSERT INTO PetAbilities (ability_name, description, required_level)
         VALUES

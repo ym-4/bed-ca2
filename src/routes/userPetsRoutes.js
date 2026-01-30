@@ -60,4 +60,7 @@ router.get('/pets/:userPetId/abilities', userPetsController.readPetAbilities);
 // leaderboard
 router.get('/leaderboard', userPetsController.readTop5Users);
 
+// pet of the day
+router.get('/top-pet', userPetsController.readTopPet);
+
 module.exports = router;

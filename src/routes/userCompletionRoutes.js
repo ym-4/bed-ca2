@@ -17,4 +17,11 @@ router.post('/:id', userCompletionController.checkChallengeExists,
 
 router.get('/:id', userCompletionController.readCompletionByChallenge);
 
+// get a user's completed challenges
+router.get('/users/:userId', userCompletionController.readCompletionByUser);
+
+// edit completion comment
+router.put('/:id/edit', userCompletionController.updateDetails)
+
+
 module.exports = router;

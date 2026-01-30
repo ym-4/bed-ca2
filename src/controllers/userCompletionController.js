@@ -44,7 +44,7 @@ module.exports.checkUserExists = (req, res, next) =>
             if(results.length == 0) 
             {
                 res.status(404).json({
-                    message: "User not found"
+                    message: "Please sign in to view task completions"
                 });
             }
             else {
@@ -252,4 +252,60 @@ module.exports.readCompletionByChallenge = (req, res, next) =>
     }
 
     userCompletionModel.selectByChallenge(data, callback);
+}
+
+module.exports.readCompletionByUser = (req, res, next) =>
+{
+    const data = {
+        userId: req.params.userId
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error readCompletionByUser:", error);
+            res.status(500).json(error);
+        } else {
+            if(results.length == 0) 
+            {
+                res.status(404).json({
+                    message: "Challenge does not have any user attempts"
+                });
+            }
+            else res.status(200).json(results);
+        }
+    }
+
+    userCompletionModel.selectByUser(data, callback);
+}
+
+module.exports.updateDetails = (req, res, next) =>
+{
+    if(req.params.id == undefined || req.body.details == undefined)
+    {
+        res.status(404).json({
+            message: "completion or details is undefined"
+        });
+        return;
+    }
+    const data = {
+        id: req.params.id,
+        details: req.body.details
+    }
+        const callback = (error, results, fields) => {
+            if (error) {
+                console.error("Error updateDetails:", error);
+                res.status(500).json(error);
+            } 
+                if(!results || results.affectedRows === 0) {
+                    res.status(404).json({
+                        message: "Completion not found"
+                    });
+                } else {
+                res.status(200).json({
+                    message: "Comment successfully changed!"
+                });
+            }
+        }
+
+        userCompletionModel.updateDetail(data, callback);
 }

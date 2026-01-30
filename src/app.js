@@ -17,6 +17,10 @@ app.use(express.urlencoded({extended:false}));
 app.use("/api", mainRoutes);
 app.use("/", express.static('public'));
 
+// image sprites
+app.use('/images/sprites', express.static('images/sprites'));
+
+
 //////////////////////////////////////////////////////
 // SETUP ROUTES
 //////////////////////////////////////////////////////

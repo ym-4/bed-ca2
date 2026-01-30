@@ -180,3 +180,34 @@ module.exports.selectByChallenge = (data, callback) =>
 
     pool.query(SQLSTATMENT, VALUES, callback); 
 }
+
+module.exports.selectByUser = (data, callback) =>
+{
+   const SQLSTATMENT = `
+    SELECT 
+    uc.completion_id,
+    uc.challenge_id,
+    wc.description,
+    uc.details,
+    uc.completed_at
+    FROM usercompletion uc, wellnesschallenge wc
+    WHERE uc.user_id = ?
+    AND uc.challenge_id = wc.challenge_id;
+    `;
+    const VALUES = [data.userId];
+
+    pool.query(SQLSTATMENT, VALUES, callback); 
+}
+
+module.exports.updateDetail = (data, callback) =>
+{
+    const SQLSTATMENT = `
+    UPDATE usercompletion
+    SET details = ?
+    WHERE completion_id = ?;
+
+     `;
+    const VALUES = [data.details, data.id];
+
+    pool.query(SQLSTATMENT, VALUES, callback);
+}

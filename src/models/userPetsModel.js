@@ -233,3 +233,20 @@ module.exports.selectTop5 = (callback) =>
 
     pool.query(SQLSTATMENT, callback);
 }
+
+module.exports.selectTopPet = (callback) =>
+{
+    const SQLSTATMENT = `
+    SELECT breed_id, breed_name
+    FROM petbreeds
+    WHERE breed_id = (
+        SELECT breed_id
+        FROM userpets
+        GROUP BY breed_id
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    );
+    `;
+
+    pool.query(SQLSTATMENT, callback);
+}

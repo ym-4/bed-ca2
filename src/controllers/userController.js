@@ -27,7 +27,7 @@ module.exports.readUserById = (req, res, next) =>
             if(results.length == 0) 
             {
                 res.status(404).json({
-                    message: "User not found"
+                    message: "Account doesn't exist"
                 });
             }
             else res.status(res.statusCode).json(results[0]);
@@ -162,9 +162,9 @@ module.exports.login = (req, res, next) => {
                 res.status(500).json(error);
             } else {
                 if(results.length == 0){
-                    res.status(404).json({message: "User not found"}); 
+                    res.status(404).json({message: "This user doesn't exist"}); 
                 } else {
-                    res.locals.userId = results[0].id
+                    res.locals.userId = results[0].user_id
                     res.locals.hash = results[0].password
                     next();
                 }

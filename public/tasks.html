@@ -39,7 +39,7 @@
               <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Tasks.html">Tasks</a>
+              <a class="nav-link" href="tasks.html">Tasks</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="petShop.html">Pet Shop</a>
@@ -78,43 +78,31 @@
 
     <main class="py-4">
       <div class="container">
-        <div class="row">
+        <!-- Available Tasks Section -->
+        <div class="row mb-5 available-bg p-4">
           <div class="col-12">
-            <div id="homeBox">
-              <h1 class="text-center mb-2" id="homeText">Seville's &#9829; Home</h1>
-              <p class="text-center" id="homeDesc">&#10047; A Cozy Pet Corner &#10047;</p>
+            <div class="text-center mb-4">
+              <h2 style="color: var(--primary-color); font-weight: 700;">Available Tasks</h2>
+              <p class="text-muted">Earn points every task you complete!</p>
             </div>
           </div>
-        </div>
-      
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-6">
-            <div class="polaroid-card">
-              <div class="polaroid-image">
-                <img id="petOfDayImage" src="" alt="Pet of the Day">
-              </div>
-              <div class="polaroid-caption">
-                <h3><i>Pet of The Day!</i></h3>
-                <h4 id="petOfDayBreed">Loading</h4>
-              </div>
-            </div>
+          <div id="availableTasks" class="row">
+            <p class="text-center">tasks here</p>
           </div>
         </div>
 
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="card">
-              <div class="leaderboard card-body p-4">
-                <h3 class="leaderboardText mb-4">Hall of Pet Lovers</h3>
-                <div id="leaderboardList">
-                  <!-- Leaderboard for biggest pet lovers -->
-                  <p class="text-center">Loading leaderboard</p>
-                </div>
-              </div>
+        <!-- Completed Tasks Section -->
+        <div class="row completed-bg p-4">
+          <div class="col-12">
+            <div class="text-center mb-4">
+              <h2 style="color: var(--secondary-color); font-weight: 700;">Completed Tasks</h2>
+              <p class="text-muted">Your task completion history!</p>
             </div>
           </div>
+          <div id="completedTasks" class="row">
+            <p class="text-center">No completed tasks</p>
+          </div>
         </div>
-      </div>
     </main>
 
     <footer class="mt-auto py-3 bg-primary text-bg-primary text-center">
@@ -135,6 +123,6 @@
         <script src="js/queryCmds.js" type="text/javascript"></script>
         <script src="js/getCurrentURL.js" type="text/javascript"></script>
         <script src="js/userNavbarToggle.js" type="text/javascript"></script>
-        <script src="js/getLeaderboard.js" type="text/javascript"></script>
+        <script src="js/getTasks.js" type="text/javascript"></script>
   </body>
 </html>

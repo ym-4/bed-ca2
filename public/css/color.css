@@ -66,15 +66,16 @@ h1, h2, h3, h4, h5 {
 
 /* Register button */
 .navbar .btn {
-  background-color: var(--secondary);
-  color: var(--text-main);
-  border-radius: 999px;
-  padding: 6px 14px;
-  border: none;
+  background-color: var(--secondary) !important;
+  color: var(--text-main) !important;
+  border-radius: 999px !important;
+  padding: 8px 17px !important;
+  border: none !important;
+  font-weight: bolder;
 }
 
 .navbar .btn:hover {
-  background-color: var(--secondary-soft);
+  background-color: var(--secondary-soft) !important;
 }
 
 /* =========================

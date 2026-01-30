@@ -522,3 +522,16 @@ module.exports.readTop5Users = (req, res, next) =>
 
     userPetsModel.selectTop5(callback);
 }
+
+module.exports.readTopPet = (req, res, next) =>
+{
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error readTopPet:", error);
+            res.status(500).json(error);
+        } 
+        else res.status(200).json(results[0]);
+    }
+
+    userPetsModel.selectTopPet(callback);
+}
