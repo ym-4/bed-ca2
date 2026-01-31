@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // pet of the day
-// Fetch Pet of the Day
 const callbackForPetOfDay = (responseStatus, responseData) => {
   if (responseStatus == 200 && responseData) {
     document.getElementById("petOfDayBreed").textContent = responseData.breed_name;

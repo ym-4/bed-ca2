@@ -24,10 +24,10 @@ router.put('/users/:userId/unequip-pet',
 
 // adopt pet by xp
 router.post('/users/:userId/adopt/pets/:breedId', 
-                    // check adoption eligibility by points
-                userPetsController.checkUserXP,
                     // check if user already owns breed
                 userPetsController.checkDupe,
+                    // check adoption eligibility by points
+                userPetsController.checkUserXP,
                     // adopts new pet                          
                 userPetsController.adoptNewPet,
                     // deducts users points by pet breed                       
@@ -53,6 +53,9 @@ router.post('/users/:userId/unlock/pets/:userPetId/ability/:abilityId',
                 //     // unlocked new                         
                 userPetsController.unlockAbility,
                 );
+
+// get pet by user_pet_id
+router.get('/pets/:userPetId', userPetsController.readUserPetId2);
 
 // user get their pet's unlocked abilities
 router.get('/pets/:userPetId/abilities', userPetsController.readPetAbilities);

@@ -53,11 +53,11 @@ module.exports.checkUserXP = (req, res, next) =>
             if(results.length == 0) 
             {
                 res.status(404).json({
-                    message: "User or pet not found"
+                    message: "Please sign in to adopt pets!"
                 });
             } else if (results[0].points < results[0].required_points) {
                 res.status(403).json({
-                    message: "Not enough points, complete more challenges to adopt!"
+                    message: "Not enough points, complete more tasks to adopt!"
                 });
             } else {
                 next();
@@ -327,7 +327,7 @@ module.exports.equipPet = (req, res, next) =>
 {
     const data = {
         user_id: req.params.userId,
-        pet_id: req.params.petId
+        pet_id: req.params.userPetId
     }
 
     const callback = (error, results, fields) => {
@@ -446,7 +446,7 @@ module.exports.checkAbility = (req, res, next) =>
             if(results.length !== 0) 
             {
                 res.status(403).json({
-                    message: "Your pet already unlocked this ability!"
+                    message: "Your equipped pet has already unlocked this ability!"
                 });
             } else {
                 next();
@@ -509,6 +509,31 @@ module.exports.readPetAbilities = (req, res, next) =>
     userPetsModel.selectAllAbilitiesById(data, callback);
 }
 
+module.exports.readUserPetId2 = (req, res, next) =>
+{
+    const data = {
+        userPetId: req.params.userPetId
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error readUserPetId2:", error);
+            res.status(500).json(error);
+        } else {
+            if(results.length == 0) 
+            {
+                res.status(404).json({
+                    message: "User pets not found"
+                });
+            }
+            else {
+                res.status(200).json(results[0]);
+            }
+        }
+    }
+
+    userPetsModel.readUserPets(data, callback);
+}
 
 module.exports.readTop5Users = (req, res, next) =>
 {

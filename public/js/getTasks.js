@@ -2,11 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const userId = localStorage.getItem("loggedInUserId");
   const token = localStorage.getItem("token");
 
-//   if (!userId || !token) {
-//     window.location.href = "login.html";
-//     return;
-//   }
-
   // Available Tasks
   const callbackForAvailableTasks = (responseStatus, responseData) => {
     const container = document.getElementById("availableTasks");
@@ -18,17 +13,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let html = '';
     responseData.forEach(task => {
-      html += `
+    const isDisabled = !userId || !token ? 'disabled' : '';
+    const buttonText = !userId || !token ? 'Please login to attempt' : 'Mark as Completed';
+    
+    html += `
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
+        <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title" style="color: var(--primary-color);">${task.description}</h5>
-              <p class="card-text"><strong>Points:</strong> <span class="badge" style="background: var(--bg-soft); color: var(--text-dark);">${task.points}</span></p>
-              <button class="btn btn-primary w-100" onclick="completeTask(${task.challenge_id})">Mark as Completed</button>
+            <h5 class="card-title" style="color: var(--primary-color);">${task.description}</h5>
+            <p class="card-text"><strong>Points:</strong> <span class="badge" style="background: var(--bg-soft); color: var(--text-dark);">${task.points}</span></p>
+            <button class="btn btn-primary w-100" ${isDisabled} onclick="completeTask(${task.challenge_id})">${buttonText}</button>
             </div>
-          </div>
         </div>
-      `;
+        </div>
+    `;
     });
     container.innerHTML = html;
   };
@@ -88,15 +86,17 @@ document.addEventListener("DOMContentLoaded", function () {
     details: comment
   };
 
-  const callback = (responseStatus, responseData) => {
+    const callback = (responseStatus, responseData) => {
     console.log(responseData);
     if (responseStatus === 201 || responseStatus === 200) {
-      alert("Task completed!");
-      location.reload();
+        showToast('Success!', 'Task marked as completed!', 'success');
+        setTimeout(() => location.reload(), 1500);
+    } else if (responseStatus === 403) {
+        showToast('Already Completed', 'You already completed this challenge today!', 'warning');
     } else {
-      alert(responseData.error || responseData.message || "Failed to complete task");
+        showToast('Error', responseData.error || responseData.message || 'Failed to complete task', 'error');
     }
-  };
+    };
 
   fetchMethod(
     currentUrl + `/api/challenges/${challengeId}`, callback, "POST", data, token
@@ -133,8 +133,34 @@ window.editComment = function (completionId) {
 };
 
   fetchMethod(currentUrl + `/api/challenges`, callbackForAvailableTasks, "GET", null, token);
-  
-  if (userId && token) {
-  fetchMethod(currentUrl + `/api/challenges/users/${userId}`, callbackForCompletedTasks, "GET", null, token);
-  }
+
+    if (userId && token) {
+        fetchMethod(currentUrl + `/api/challenges/users/${userId}`, callbackForCompletedTasks, "GET", null, token);
+    } else {
+    // login message for non logged in users
+        document.getElementById("completedTasks").innerHTML = `
+            <div class="col-12">
+            <div class="alert alert-light text-center" role="alert">
+                <p class="mb-2">Please log in to view your completed tasks!</p>
+                <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+            </div>
+            </div>
+        `;
+    }
 });
+
+function showToast(title, message, type = 'success') {
+  const toastEl = document.getElementById('notificationToast');
+  const toastHeader = document.getElementById('toastHeader');
+  
+  // Color based on type
+  if (type === 'success') toastHeader.style.backgroundColor = '#d4edda';
+  if (type === 'error') toastHeader.style.backgroundColor = '#f8d7da';
+  if (type === 'warning') toastHeader.style.backgroundColor = '#fff3cd';
+  
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMessage').textContent = message;
+  
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}

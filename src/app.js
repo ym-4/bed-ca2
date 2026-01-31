@@ -18,8 +18,11 @@ app.use("/api", mainRoutes);
 app.use("/", express.static('public'));
 
 // image sprites
-app.use('/images/sprites', express.static('images/sprites'));
+app.use('/images/sprites', express.static('images/sprites')); 
+/* credit: https://www.spicymochi.com/portfolio.html */
 
+app.use('/images/powers', express.static('images/powers')); 
+/* credit: https://b0tfly.itch.io/ */
 
 //////////////////////////////////////////////////////
 // SETUP ROUTES

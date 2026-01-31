@@ -12,8 +12,16 @@ module.exports.selectAll = (callback) =>
 module.exports.selectById = (data, callback) =>
 {
    const SQLSTATMENT = `
-    SELECT * FROM userpets
-    WHERE user_id = ?;
+    select up.user_pet_id, 
+    up.user_id, 
+    up.breed_id, 
+    pb.breed_name, 
+    up.pet_name, 
+    up.pet_level, 
+    up.experience_points
+    from userpets up, petbreeds pb
+    where up.breed_id = pb.breed_id 
+    and user_id = ?;
     `;
     const VALUES = [data.id];
 
@@ -208,8 +216,14 @@ module.exports.unlockNewAbility = (data, callback) =>
 module.exports.selectAllAbilitiesById = (data, callback) =>
 {
    const SQLSTATMENT = `
-    SELECT * FROM userpetabilities
-    WHERE user_pet_id = ?;
+    SELECT upa.user_pet_ability_id, 
+    upa.user_pet_id, 
+    upa.ability_id, 
+    pa.ability_name, 
+    upa.unlocked_at
+    FROM pet.userpetabilities upa, petabilities pa
+    where upa.ability_id = pa.ability_id
+    and user_pet_id = ?;
     `;
     const VALUES = [data.userPetId];
 

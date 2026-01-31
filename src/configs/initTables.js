@@ -141,11 +141,11 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
 
         INSERT INTO PetAbilities (ability_name, description, required_level)
         VALUES
-        ('Purr Heal', 'Boosts motivation by providing calming purrs.', 0),
-        ('Sprint Boost', 'Gives a burst of energy to take more steps.', 1),
-        ('Shell Sanctuary', 'Increases focus for meditation challenges.', 2),
-        ('Backflip', 'Somersaults happily for every challenge completed.', 3),
-        ('Universal Cheer', 'A simple cheer that will make your day.', 4);
+        ('Purrfect Purin Heal', 'Your pet will boost motivation with calming purrs through a bite of pudding comfort.', 0),
+        ('Sprint Snack Boost', 'Your pet will give you a burst of energy like taking a quick munch from a dorayaki.', 1),
+        ('Shell Melonpan Sanctuary', 'Your pet will help increase focus as if warmed by a cozy melonpan.', 2),
+        ('Backflip Dango Burst', 'Your pet will somersault happily, celebrating each completion with a dango.', 3),
+        ('Universal Cheer Taiyaki', 'Your pet will provide encouraging cheers served with a fish-shaped treat.', 4);
 
         INSERT INTO UserPets (user_id, breed_id, pet_name, pet_level, experience_points)
         VALUES

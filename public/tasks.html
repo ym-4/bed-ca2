@@ -45,9 +45,6 @@
               <a class="nav-link" href="petShop.html">Pet Shop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pets.html">My Pets</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="reviews.html">Reviews</a>
             </li>
           </ul>
@@ -55,6 +52,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- ms-auto: margin-left: auto -->
           <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a id="myPetsButton" href="/pets.html" class="nav-link">My Pets</a>
+            </li>
             <li class="nav-item">
               <a id="profileButton" href="/profile.html" class="nav-link">Profile</a>
             </li>
@@ -100,7 +100,7 @@
             </div>
           </div>
           <div id="completedTasks" class="row">
-            <p class="text-center">No completed tasks</p>
+            <p class="text-center">No completed tasks yet</p>
           </div>
         </div>
     </main>
@@ -110,6 +110,17 @@
         Seville's Home © 2026 BED CA2. All Rights Reserved
       </p>
     </footer>
+
+          <!-- Toast Container -->
+      <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="notificationToast" class="toast" role="alert">
+          <div class="toast-header" id="toastHeader">
+            <strong class="me-auto" id="toastTitle">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body" id="toastMessage"></div>
+        </div>
+      </div>
 
     <!-- ADD JAVASCRIPTS BEFORE BODY ENDTAG -->
      <script
