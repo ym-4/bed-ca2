@@ -78,22 +78,126 @@
     </nav>
 
     <main class="py-4">
-        <div class="container pb-4">
-            <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h1 id="welcomeMessage" class="mb-4 text-center" style="color: var(--primary-color);">Welcome back! 🐾</h1>
-                
-                <div id="userInfo" class="card" style="border-radius: 16px;">
-                <div class="card-body p-4">
-                    <p><strong>Username:</strong> <span id="username">Loading...</span></p>
-                    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-                    <p><strong>Pet Owner since:</strong> <span id="createdOn">Loading...</span></p>
-                    <p><strong>Points:</strong> <span id="points" style="background: var(--accent-light); padding: 2px 10px; border-radius: 12px;">0</span></p>
+    <div class="container pb-4">
+
+         <!-- Welcome Header -->
+        <div class="row justify-content-center mb-4">
+        <div class="col-12 text-center" id="welcomeMessage">
+            <h1 style="color: var(--primary-color); font-weight: 700; font-size: 2.5rem;">
+            Welcome back! 
+            </h1>
+        </div>
+        </div>
+
+        <!-- Profile Info -->
+        <div class="row justify-content-center mb-5">
+        <div class="col-12">
+            <div class="card profile-card" style="border-radius: 20px; border: 2px solid var(--border-color); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); position: relative;">
+            <!-- Delete Account  -->
+            <button class="btn btn-danger btn-sm" onclick="deleteAccount()" style="position: absolute; top: 1rem; right: 1rem; z-index: 10;">
+                Delete Account
+            </button>
+            
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                <!-- User Info -->
+                <div class="col-md-7">
+                    <div class="mb-3">
+                    <label class="form-label fw-bold" style="color: var(--text-dark);">Username</label>
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="form-control" id="usernameDisplay" style="background-color: #f8f9fa; flex: 1;">Loading...</div>
+                        <button class="btn btn-primary btn-sm" onclick="openEditUsernameModal()" style="white-space: nowrap;">Edit</button>
+                    </div>
+                    </div>
+
+                    <!-- Email  -->
+                    <div class="mb-3">
+                    <label class="form-label fw-bold" style="color: var(--text-dark);">Email</label>
+                    <div class="form-control" id="emailDisplay" style="background-color: #f8f9fa;">Loading...</div>
+                    </div>
+
+                    <!-- Pet Owner Since -->
+                    <div class="mb-3">
+                    <label class="form-label fw-bold" style="color: var(--text-dark);">Pet Owner Since</label>
+                    <div class="form-control" id="createdOnDisplay" style="background-color: #f8f9fa;">Loading...</div>
+                    </div>
+
+                    <!-- Points -->
+                    <div class="mb-3">
+                    <label class="form-label fw-bold" style="color: blueviolet;">Points</label>
+                    <div class="form-control" id="pointsDisplay" style="color:blueviolet; background-color: var(--accent-light); font-weight: 700;">0</div>
+                    </div>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="col-md-5 text-center">
+                    <img id="profileImage" src="images/profile.jpg" alt="Profile" class="img-fluid" style="max-height: 280px; border-radius: 50%; object-fit: cover;">
                 </div>
                 </div>
             </div>
             </div>
         </div>
+        </div>
+
+        <!-- Your Tasks Section -->
+        <div class="row justify-content-center">
+        <div class="col-12 profileSec">
+            <h2 class="mb-4 text-center" style="color: var(--secondary-color); font-weight: 700; font-size: 2.5rem;">
+            Your Tasks
+            </h2>
+            <div id="tasksGrid" class="row g-4">
+            <!-- Create New Task Card -->
+            <div class="col-md-6">
+                <div class="card" style="border-radius: 16px; border: 3px dashed var(--primary-color); background-color: rgb(253, 252, 243);">
+                <div class="card-body p-4">
+                    <h5 class="card-title text-center mb-3" style="color: var(--primary-color); font-weight: 700;">
+                    Create New Task
+                    </h5>
+                    <form id="createTaskForm">
+                    <div class="mb-3">
+                        <label for="newTaskDescription" class="form-label fw-bold">Description</label>
+                        <textarea class="form-control" id="newTaskDescription" rows="3" required placeholder="Enter task description..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newTaskPoints" class="form-label fw-bold">Points Reward</label>
+                        <input type="number" class="form-control" id="newTaskPoints" required min="1" placeholder="How many points do you want to award for completion?">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Create Task</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Edit Username Modal -->
+    <div class="modal fade" id="editUsernameModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: rgb(218, 218, 218); border-radius: 16px; border: 2px solid var(--border-color);">
+        <div class="modal-body p-4">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+            <form id="editUsernameForm">
+            <div class="mb-3 mt-3">
+                <label for="newUsername" class="form-label fw-bold" style="color: var(--text-dark);">New Username</label>
+                <input type="text" class="form-control" id="newUsername" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; display: none;">
+        <div class="alert alert-dismissible fade show" role="alert" style="border-radius: 12px;">
+        <span id="toastMessage"></span>
+        <button type="button" class="btn-close" onclick="hideToast()"></button>
+        </div>
+    </div>
     </main>
 
     <footer class="mt-auto py-3 bg-primary text-bg-primary text-center">

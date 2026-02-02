@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (status === 200) {
         displayPets(data);
       } else {
-        document.getElementById('petsGrid').innerHTML = '<div class="col-12 text-center"><p class="text-danger">Failed to load pets</p></div>';
+        document.getElementById('petsGrid').innerHTML = '<div class="col-12 text-center"><p class="text-dark">No pets owned at the moment...<br> Go ahead and <a href="petShop.html">adopt a new friend</a> to join you!</p></div>';
       }
     }, "GET", null, token);
   }
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             <div class="d-grid gap-2">
               <button class="btn btn-sm" style="background-color: #e2dac5;" onclick="editPetName(${pet.user_pet_id}, '${pet.pet_name}')">
-                Edit
+                Edit Name
               </button>
               ${!isEquipped ? `
                 <button class="btn btn-sm" style="background-color: rgb(144, 160, 121);" onclick="equipPet(${pet.user_pet_id})">
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `).join('');
       } else {
-        container.innerHTML = '<p class="text-center text-muted">No abilities unlocked yet</p>';
+        container.innerHTML = '<p class="text-center text-muted">No abilities unlocked yet <br> Visit the <a href="petShop.html">Abilities Canopy</a> to unlock new powers!</p>';
       }
     }, "GET", null, token);
   }
@@ -230,6 +230,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, "PUT", null, token);
   };
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
   loadEquippedPet();
   loadAllPets();

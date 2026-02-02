@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const modal = bootstrap.Modal.getInstance(document.getElementById('powerShopModal'));
             if (modal) modal.hide();
             location.reload();
-          }, 1500);
+          }, 1800);
 
         } else {
           showToast('Error', unlockData?.message || 'Failed to unlock power', 'error');

@@ -155,15 +155,34 @@ module.exports.deleteCompletionsById = (req, res, next) =>
             console.error("Error deleteChallengeById:", error);
             res.status(500).json(error);
         } else {
-            if(results.affectedRows == 0) 
-            {
-                res.status(404).json({
-                    message: "Challenge not found"
-                });
-            }
-            else res.status(204).send();          
+            res.status(204).send();          
         }
     }
 
     wellnessChallengeModel.deleteCompletionById(data, callback);
+}
+
+// get creations
+module.exports.readChallengeCreator = (req, res, next) =>
+{
+    const data = {
+        userId: req.params.userId
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error readChallengeCreator:", error);
+            res.status(500).json(error);
+        } else {
+            if(results.length == 0) 
+            {
+                res.status(404).json({
+                    message: "No creations found"
+                });
+            }
+            else res.status(res.statusCode).json(results);
+        }
+    }
+
+    wellnessChallengeModel.selectCreator(data, callback);
 }

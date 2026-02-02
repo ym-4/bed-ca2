@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"/>
+      <link href="css/style.css" rel="stylesheet" />
+      <link href="css/color.css" rel="stylesheet" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Home</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"
+          ><img src="./images/weblogo.png"
+            class="logo img-fluid"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- me-auto: margin-right: auto -->
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Tasks.html">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="petShop.html">Pet Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reviews.html">Reviews</a>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- ms-auto: margin-left: auto -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a id="myPetsButton" href="/pets.html" class="nav-link">My Pets</a>
+            </li>
+            <li class="nav-item">
+              <a id="profileButton" href="/profile.html" class="nav-link">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a id="logoutButton" href="#" class="nav-link">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a id="loginButton" href="/login.html" class="nav-link">Login</a>
+            </li>
+            <li>
+              <div class="btn-nav">
+                <a id="registerButton" class="btn text-bg-dark btn-small navbar-btn" href="/register.html"
+                  >Register!</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="py-4 reviewBody">
+    <div class="container pb-4">
+        <!-- Post New Review  -->
+        <div class="row justify-content-center mb-5">
+        <div class="col-md-8 reviewCon">
+            <div class="card" style="border-radius: 20px; border: 3px dashed var(--primary-color); background-color: var(--bg-cream);">
+            <div class="card-body p-4">
+                <h4 class="text-center mb-4" style="color: var(--primary-color); font-weight: 700;">
+                Share Your Experience
+                </h4>
+                <form id="createReviewForm">
+                <!-- Name -->
+                <div class="mb-3">
+                    <label for="newReviewName" class="form-label fw-bold">Name</label>
+                    <input type="text" class="form-control" id="newReviewName" required placeholder="Let the community know who you are">
+                </div>
+                <!-- Star Rating -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Rating</label>
+                    <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" required>
+                    <label for="star5" title="5 stars">★</label>
+                    
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4 stars">★</label>
+                    
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="3 stars">★</label>
+                    
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2 stars">★</label>
+                    
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1 star">★</label>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="newReviewDescription" class="form-label fw-bold">Your Review</label>
+                    <textarea class="form-control" id="newReviewDescription" rows="4" required placeholder="Share your thoughts..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Post Review</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- All Reviews  -->
+        <div class="row justify-content-center">
+        <div class="col-12">
+            <h3 class="mb-4 text-center communityTitle" style="color: var(--secondary-color); font-weight: 700;">
+            Community Reviews
+            </h3>
+            <div id="reviewsGrid" class="row g-4">
+            <div class="col-12 text-center">
+                <p class="text-muted">Loading reviews...</p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 9999; display: none;">
+        <div class="alert alert-dismissible fade show" role="alert" style="border-radius: 12px;">
+        <span id="toastMessage"></span>
+        <button type="button" class="btn-close" onclick="hideToast()"></button>
+        </div>
+    </div>
+    </main>
+
+    <footer class="mt-auto py-3 bg-primary text-bg-primary text-center">
+      <p class="m-0 py-0 px-4">
+        Seville's Home © 2026 BED CA2. All Rights Reserved
+      </p>
+    </footer>
+
+    <!-- ADD JAVASCRIPTS BEFORE BODY ENDTAG -->
+     <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+        <script src="js/queryCmds.js" type="text/javascript"></script>
+        <script src="js/getCurrentURL.js" type="text/javascript"></script>
+        <script src="js/userNavbarToggle.js" type="text/javascript"></script>
+        <script src="js/getReviews.js" type="text/javascript"></script>
+  </body>
+</html>

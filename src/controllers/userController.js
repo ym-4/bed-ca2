@@ -72,7 +72,7 @@ module.exports.createNewUser = (req, res, next) =>
 
 module.exports.updateUserById = (req, res, next) =>
 {
-    if(req.body.username == undefined || req.body.points == undefined)
+    if(req.body.username == undefined)
     {
         res.status(400).json({
             message: "Error: username or points is undefined"

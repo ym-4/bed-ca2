@@ -5,6 +5,7 @@ const userRoutes = require('./userRoutes');
 const wellnessChallengeRoutes = require('./wellnessChallengeRoutes');
 const userCompletionRoutes = require('./userCompletionRoutes')
 const userPetsRoutes = require('./userPetsRoutes');
+const reviewRoutes = require('./reviewRoutes');
 
 const bcryptMiddleware = require("../middlewares/bcryptMiddleware");
 const jwtMiddleware = require("../middlewares/jwtMiddleware");
@@ -14,6 +15,7 @@ router.use("/users", userRoutes);
 router.use("/challenges", wellnessChallengeRoutes);
 router.use("/challenges/", userCompletionRoutes);
 router.use("/", userPetsRoutes);
+router.use("/review", reviewRoutes);
 
 router.post("/login", 
     userController.login, 

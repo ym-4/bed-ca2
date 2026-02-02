@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(responseData);
     if (responseStatus === 201 || responseStatus === 200) {
         showToast('Success!', 'Task marked as completed!', 'success');
-        setTimeout(() => location.reload(), 1500);
-    } else if (responseStatus === 403) {
+        setTimeout(() => location.reload(), 1800);
+    } else if (responseStatus === 409) {
         showToast('Already Completed', 'You already completed this challenge today!', 'warning');
     } else {
         showToast('Error', responseData.error || responseData.message || 'Failed to complete task', 'error');

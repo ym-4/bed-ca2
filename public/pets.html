@@ -77,7 +77,7 @@
     </nav>
     
     <main class="py-4">
-    <div class="container pb-4">
+    <div class="container pb-4 petsCon">
         <h2 class="mb-4 p-3 text-center myPets" style="color: var(--secondary-color); font-weight: 700; border-radius: 15px;">
             My Pets &#10047; Collection
         </h2>
@@ -93,7 +93,9 @@
                         <img id="equippedPetImage" class="equipped-pet-img" src="" alt="Pet" style="display: none;">
                         <div id="noEquippedPetMsg" class="no-pet-msg">
                         <p class="no-pet-icon">&#9787;</p>
-                        <p class="no-pet-text">Equip a pet to see it here!</p>
+                        <p class="no-pet-text">Equip a pet to see it here!
+                            <p id="no-pet-sm-text">Don't own any pets? <a href="petShop.html">Adopt one</a></p>
+                        </p>
                         </div>
                     </div>
                     </div>
@@ -116,7 +118,27 @@
                         <div class="stat-card stat-level">
                             <span class="stat-icon">📊</span>
                             <div>
-                            <small class="stat-label">Level</small>
+                            <small class="stat-label">
+                            Level
+                            <span 
+                                data-bs-toggle="tooltip" 
+                                data-bs-html="true"
+                                data-bs-title="
+                                Level up your equipped pet by gaining XP!<br><br>
+                                <strong>Pet Levels:</strong><br>
+                                <i>Level 1 - 0 XP<br>
+                                Level 2 - 100 XP<br>
+                                Level 3 - 300 XP<br>
+                                Level 4 - 600 XP<br>
+                                Level 5 - 1000 XP<br>
+                                Level 6 - 1500 XP<br>
+                                Level 7 - 2100 XP<br>
+                                Level 8 - 2800 XP<br>
+                                Level 9 - 3600 XP<br>
+                                Level 10 - 4500 XP</i>"
+                                style="cursor: help; font-size: 1.2rem;">&#128712;
+                            </span>
+                            </small>
                             <strong id="equippedPetLevel" class="stat-value">-</strong>
                             </div>
                         </div>
@@ -126,7 +148,10 @@
                         <div class="stat-card stat-exp">
                             <span class="stat-icon">✨</span>
                             <div>
-                            <small class="stat-label">Experience Points</small>
+                            <small class="stat-label">
+                                Experience Points
+                                <span data-bs-toggle="tooltip" data-bs-title="Your pet earns XP when you complete tasks while it’s equipped!" style="cursor: help; font-size: 1.2rem;">&#128712;</span>
+                            </small>
                             <strong id="equippedPetExp" class="stat-value">-</strong>
                             </div>
                         </div>

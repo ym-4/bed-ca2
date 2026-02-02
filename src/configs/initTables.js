@@ -35,18 +35,19 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
 
         DROP TABLE IF EXISTS PetLevelSystem;
 
-        CREATE TABLE User (
-        user_id INT PRIMARY KEY AUTO_INCREMENT,
-        username TEXT NOT NULL,
-        email TEXT NOT NULL,
-        password TEXT NOT NULL,
-        created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        last_login_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        points INT DEFAULT 0,
-        equipped_pet_id INT DEFAULT NULL
+        DROP TABLE IF EXISTS Reviews;
 
-      );
+        CREATE TABLE User (
+            user_id INT PRIMARY KEY AUTO_INCREMENT,
+            username VARCHAR(100) NOT NULL UNIQUE,  
+            email VARCHAR(255) NOT NULL UNIQUE,     
+            password TEXT NOT NULL,
+            created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            last_login_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            points INT DEFAULT 0,
+            equipped_pet_id INT DEFAULT NULL
+        );
 
         CREATE TABLE WellnessChallenge (
             challenge_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -193,6 +194,21 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         (6, 3),
         (7, 1),
         (7, 2);
+
+        CREATE TABLE Reviews (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          name VARCHAR(100) NOT NULL,
+          review_amt INT NOT NULL CHECK (review_amt BETWEEN 1 AND 5),
+          description TEXT,
+          user_id INT NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        INSERT INTO Reviews (name, review_amt, user_id, description) VALUES
+        ('Johnathan', 5, 1, 'I didn’t expect to get so attached, but raising my little virtual pet feels like bringing joy into my day. Every adoption feels special, and I love checking in to see my furry friend. It’s like a pocket of comfort whenever I log in.'),
+        ('ben', 4, 2, 'The art, the atmosphere, the pets... it all feels so warm. I love reading other players’ adoption stories too. It feels like we’re all part of one big, cozy community of animal lovers.'),
+        ('Doeoe', 4, 3, 'Good overall, would adopt imaginary pets again');
+
       `;
 
     pool.query(SQLSTATEMENT, callback);

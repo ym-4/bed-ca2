@@ -5,7 +5,7 @@ module.exports.checkChallengeExists = (req, res, next) =>
     const data = {
         challenge_id: req.params.id,
         user_id: req.body.user_id,
-        details: req.body.details
+        description: req.body.description
     }
 
     const callback = (error, results, fields) => {
@@ -70,7 +70,7 @@ module.exports.checkRecentCompletion = (req, res, next) =>
         } else {
             if(results.length !== 0) 
             {
-                res.status(403).json({
+                res.status(409).json({
                     message: "You already completed this challenge today!"
                 });
             }

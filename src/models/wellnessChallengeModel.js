@@ -77,3 +77,15 @@ module.exports.deleteCompletionById = (data, callback) =>
 
     pool.query(SQLSTATMENT, VALUES, callback);
 }
+
+// get creations
+module.exports.selectCreator = (data, callback) =>
+{
+   const SQLSTATMENT = `
+    SELECT * FROM wellnesschallenge
+    WHERE creator_id = ?;
+    `;
+    const VALUES = [data.userId];
+
+    pool.query(SQLSTATMENT, VALUES, callback); 
+}
