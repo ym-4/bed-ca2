@@ -134,19 +134,21 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
 
         INSERT INTO PetBreeds (breed_name, description, required_points)
         VALUES
-        ('Happy Hippo', 'A gentle digital moo deng that represents calmness.', 0),
-        ('Playful Puppy', 'A playful dog that encourages daily activity.', 50),
+        ('Happy Hippo', 'A gentle digital moo deng that represents calmness.', 70),
+        ('Playful Puppy', 'A playful dog that encourages daily activity.', 250),
         ('Heroic Platypus', 'A semi-aquatic, egg-laying mammal of action that helps promote mindfulness and slow living.', 120),
-        ('Frilly Axolotl', 'Induces longevity in its owner by means of being a familiar', 1000000),
-        ('Silly Duck', 'A legendary creature unlocked by high wellness mastery.', 250);
+        ('Frilly Axolotl', 'Induces longevity in its owner by means of being a familiar', 100000),
+        ('Silly Duck', 'A legendary creature unlocked by high wellness mastery.', 330),
+        ('Twilight Bat', 'A cozy winged companion that thrives in the night, symbolizing quiet strength.', 560),
+        ('Clever Rat', 'A clever gourmand who celebrates the comfort of shared food.', 410);
 
         INSERT INTO PetAbilities (ability_name, description, required_level)
         VALUES
-        ('Purrfect Purin Heal', 'Your pet will boost motivation with calming purrs through a bite of pudding comfort.', 0),
-        ('Sprint Snack Boost', 'Your pet will give you a burst of energy like taking a quick munch from a dorayaki.', 1),
-        ('Shell Melonpan Sanctuary', 'Your pet will help increase focus as if warmed by a cozy melonpan.', 2),
-        ('Backflip Dango Burst', 'Your pet will somersault happily, celebrating each completion with a dango.', 3),
-        ('Universal Cheer Taiyaki', 'Your pet will provide encouraging cheers served with a fish-shaped treat.', 4);
+        ('Purrfect Purin Heal', 'Your pet will boost motivation with calming purrs through a bite of pudding comfort. (+10% points bonus)', 1),
+        ('Sprint Snack Boost', 'Your pet will give you a burst of energy like taking a quick munch from a dorayaki. (+30% points bonus)', 2),
+        ('Shell Melonpan Sanctuary', 'Your pet will help increase focus as if warmed by a cozy melonpan. (+50% points bonus)', 3),
+        ('Backflip Dango Burst', 'Your pet will somersault happily, celebrating each completion with a dango. (+70% points bonus)', 4),
+        ('Universal Cheer Taiyaki', 'Your pet will provide encouraging cheers served with a fish-shaped treat. (+90% points bonus)', 5);
 
         INSERT INTO UserPets (user_id, breed_id, pet_name, pet_level, experience_points)
         VALUES

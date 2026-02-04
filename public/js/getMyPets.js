@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let equippedPetId = null;
+  let currentEditPetId = null;
 
-  // Toast notification functions
+  // Toast notification 
   window.showToast = function(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
@@ -170,23 +171,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "GET", null, token);
   }
 
-  // Edit pet name
+  // Edit pet name - updated to use modal
   window.editPetName = function(userPetId, currentName) {
-    const newName = prompt('Enter a new name for your pet:', currentName);
-    if (newName && newName.trim() !== '' && newName !== currentName) {
-      fetchMethod(currentUrl + `/api/users/${userId}/pets/${userPetId}`, (status, data) => {
-        if (status === 200) {
-          showToast('Pet name updated successfully!', 'success');
-          loadAllPets();
-          if (equippedPetId === userPetId) {
-            loadEquippedPet();
-          }
-        } else {
-          showToast(data.message || 'Failed to update pet name', 'danger');
-        }
-      }, "PUT", { pet_name: newName.trim() }, token);
-    }
+    currentEditPetId = userPetId;
+    document.getElementById('newPetNameInput').value = currentName;
+    
+    const modal = new bootstrap.Modal(document.getElementById('editPetNameModal'));
+    modal.show();
   };
+
+  // Edit pet name form submission
+  document.getElementById('editPetNameForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const newName = document.getElementById('newPetNameInput').value.trim();
+    
+    if (!newName) {
+      showToast('Please enter a valid name', 'warning');
+      return;
+    }
+
+    fetchMethod(currentUrl + `/api/users/${userId}/pets/${currentEditPetId}`, (status, data) => {
+      if (status === 200) {
+        showToast('Pet name updated successfully!', 'success');
+        const modal = bootstrap.Modal.getInstance(document.getElementById('editPetNameModal'));
+        modal.hide();
+        loadAllPets();
+        if (equippedPetId === currentEditPetId) {
+          loadEquippedPet();
+        }
+      } else {
+        showToast(data.message || 'Failed to update pet name', 'danger');
+      }
+    }, "PUT", { pet_name: newName }, token);
+  });
 
   // Equip pet
   window.equipPet = function(userPetId) {
@@ -231,8 +249,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "PUT", null, token);
   };
 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  // tooltips
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
   loadEquippedPet();
   loadAllPets();

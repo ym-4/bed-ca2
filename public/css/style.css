@@ -91,6 +91,17 @@ a, button {
   transition: all 0.25s ease;
 }
 
+.registerText {
+  font-size: 14px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#registerLink {
+  text-decoration: none;
+  color: #d49727;
+  font-weight: 500;
+}
+
 #warningCard {
   background-color: #ffebee;
   border: 2px solid #dc3545 !important;
@@ -317,6 +328,10 @@ body.modal-open {
 }
 
 /* my pets page */
+.petsBody {
+  background-color: rgba(255, 242, 167, 0.365);
+}
+
 .petsCon {
   background-color: rgb(232, 249, 200);
   padding: 20px;
@@ -452,6 +467,10 @@ body.modal-open {
 }
 
 /*profile pg */
+.profileBody {
+  background-color: rgba(246, 216, 255, 0.365);
+}
+
 .usernameGreet {
   color: #a05fb5;  
   font-weight: bold;
@@ -487,7 +506,7 @@ body.modal-open {
 
 /* reviews pg*/
 .reviewBody {
-  background-color: rgba(131, 179, 102, 0.395);;
+  background-color: rgba(131, 179, 102, 0.395);
 }
 
 .reviewCon {

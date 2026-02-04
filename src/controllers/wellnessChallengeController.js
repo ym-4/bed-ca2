@@ -44,6 +44,11 @@ module.exports.createNewChallenge = (req, res, next) =>
         res.status(400).send("Error: description or user_id or points is undefined");
         return;
     }
+    else if (req.body.points < 5 || req.body.points > 250)
+    {
+        res.status(400).send({"message": "Points reward must be between 5 and 250"});
+        return;
+    }
 
     const data = {
         description: req.body.description,

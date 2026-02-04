@@ -102,6 +102,67 @@ module.exports.checkEquippedPet = (req, res, next) =>
     userCompletionModel.checkEquippedPet(data, callback);
 }
 
+module.exports.calculatePowerBonus = (req, res, next) =>
+{
+    const data = {
+        user_id: req.body.user_id
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error calculatePowerBonus:", error);
+            req.powerMultiplier = 1.00;
+        } else {
+            // Map ability_id to multiplier
+            const abilityMultiplierMap = {
+                1: 1.10, // Purrfect Purin Heal - 10%
+                2: 1.30, // Sprint Snack Boost - 30%
+                3: 1.50, // Shell Melonpan Sanctuary - 50%
+                4: 1.70, // Backflip Dango Burst - 70%
+                5: 1.90  // Universal Cheer Taiyaki - 90%
+            };
+            
+            const highestAbility = results[0]?.highest_ability_id;
+            req.powerMultiplier = abilityMultiplierMap[highestAbility] || 1.00;
+            
+            if (req.powerMultiplier > 1.00) {
+                req.powerBonusApplied = true;
+            }
+        }
+        next();
+    }
+
+    userCompletionModel.getEquippedPetBonus(data, callback);
+}
+
+module.exports.applyPowerBonusToPoints = (req, res, next) =>
+{
+    const data = {
+        challenge_id: req.params.id,
+        user_id: req.body.user_id,
+        multiplier: req.powerMultiplier || 1.00
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error applyPowerBonusToPoints:", error);
+            res.status(500).json(error);
+        } else {
+            if(results.affectedRows == 0) 
+            {
+                res.status(404).json({
+                    message: "User not found"
+                });
+            } else {
+                res.statusCode = 200;
+                next();
+            }
+        }
+    }
+
+    userCompletionModel.updatePointsWithBonus(data, callback);
+}
+
 module.exports.updateUserPoints = (req, res, next) =>
 {
     const data = {
@@ -171,6 +232,10 @@ module.exports.checkPetLevelUp = (req, res, next) =>
             req.levelCheckError = error.message;
         } else {
             req.levelCheckResult = results;
+            if (results.leveledUp) {
+                req.levelUpStatus = "success";
+                req.levelUpMessage = `Your pet leveled up from ${results.oldLevel} to ${results.newLevel}!`;
+            }
         }
         next();
     }
@@ -223,7 +288,21 @@ module.exports.readCompletionById = (req, res, next) =>
                     message: "Completion not found"
                 });
             }
-            else res.status(201).json(results[0]);
+            else {
+                const response = results[0];
+                if (req.levelUpMessage) {
+                    response.levelUpMessage = req.levelUpMessage;
+                    response.leveledUp = true;
+                }
+                if (req.powerBonusApplied) {
+                    response.powerBonus = {
+                        multiplier: req.powerMultiplier,
+                        bonusPercent: Math.round((req.powerMultiplier - 1) * 100),
+                        message: `Power bonus activated! +${Math.round((req.powerMultiplier - 1) * 100)}% points`
+                    };
+                }
+                res.status(201).json(results[0]);
+            }
         }
     }
 
@@ -308,4 +387,38 @@ module.exports.updateDetails = (req, res, next) =>
         }
 
         userCompletionModel.updateDetail(data, callback);
+}
+
+module.exports.getUserPowerBonus = (req, res, next) =>
+{
+    const data = {
+        user_id: req.params.userId
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getUserPowerBonus:", error);
+            res.status(500).json(error);
+        } else {
+            const abilityMultiplierMap = {
+                1: 1.10,
+                2: 1.30, 
+                3: 1.50,
+                4: 1.70,
+                5: 1.90
+            };
+            
+            const highestAbility = results[0]?.highest_ability_id;
+            const multiplier = abilityMultiplierMap[highestAbility] || 1.00;
+            
+            res.status(200).json({
+                highest_ability_id: highestAbility,
+                multiplier: multiplier,
+                bonus_percent: Math.round((multiplier - 1) * 100),
+                has_bonus: multiplier > 1.00
+            });
+        }
+    }
+
+    userCompletionModel.getEquippedPetBonus(data, callback);
 }

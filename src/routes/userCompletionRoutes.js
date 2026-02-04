@@ -6,8 +6,10 @@ const userCompletionController = require('../controllers/userCompletionControlle
 router.post('/:id', userCompletionController.checkChallengeExists,
                     userCompletionController.checkUserExists,
                     userCompletionController.checkRecentCompletion,
-                    userCompletionController.checkEquippedPet, 
-                    userCompletionController.updateUserPoints,
+                    userCompletionController.checkEquippedPet,
+                    // check for points multiplier
+                    userCompletionController.calculatePowerBonus,          
+                    userCompletionController.applyPowerBonusToPoints,
                     // xp distributed for equipped pet only
                     userCompletionController.awardPetXP, 
                     // pet levels up if eligible
@@ -22,6 +24,9 @@ router.get('/users/:userId', userCompletionController.readCompletionByUser);
 
 // edit completion comment
 router.put('/:id/edit', userCompletionController.updateDetails)
+
+// Get user's power bonus 
+router.get('/users/:userId/power-bonus', userCompletionController.getUserPowerBonus);
 
 
 module.exports = router;

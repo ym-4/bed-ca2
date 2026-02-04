@@ -62,6 +62,38 @@ module.exports.checkEquippedPet = (data, callback) =>
     pool.query(SQLSTATMENT, VALUES, callback);
 }
 
+// Add after existing functions in userCompletionModel.js
+
+module.exports.getEquippedPetBonus = (data, callback) =>
+{
+   const SQLSTATMENT = `
+    SELECT MAX(pa.ability_id) as highest_ability_id
+    FROM UserPetAbilities upa
+    JOIN User u ON u.equipped_pet_id = upa.user_pet_id
+    JOIN PetAbilities pa ON pa.ability_id = upa.ability_id
+    WHERE u.user_id = ?;
+    `;
+    const VALUES = [data.user_id];
+
+    pool.query(SQLSTATMENT, VALUES, callback);
+}
+
+module.exports.updatePointsWithBonus = (data, callback) =>
+{
+    const SQLSTATMENT = `
+    UPDATE User
+        SET points = points + (
+        SELECT points * ?
+        FROM WellnessChallenge 
+        WHERE challenge_id = ?
+        )
+    WHERE user_id = ?;
+     `;
+    const VALUES = [data.multiplier, data.challenge_id, data.user_id];
+
+    pool.query(SQLSTATMENT, VALUES, callback);
+}
+
 module.exports.insertSingle = (data, callback) =>
 {
   const SQLSTATMENT = `
@@ -71,23 +103,6 @@ module.exports.insertSingle = (data, callback) =>
     const VALUES = [data.challenge_id, data.user_id, data.details];
 
     pool.query(SQLSTATMENT, VALUES, callback);    
-}
-
-module.exports.updateUserPoints = (data, callback) =>
-{
-    const SQLSTATMENT = `
-     UPDATE User
-        SET points = points + (
-        SELECT points 
-        FROM WellnessChallenge 
-        WHERE challenge_id = ?
-        )
-    WHERE user_id = ?;
-
-     `;
-    const VALUES = [data.challenge_id, data.user_id];
-
-    pool.query(SQLSTATMENT, VALUES, callback);
 }
 
 module.exports.awardPetXP = (data, callback) =>

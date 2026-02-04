@@ -106,7 +106,7 @@ module.exports.adoptNewPet = (req, res, next) =>
         userId: req.params.userId,
         breedId: req.params.breedId,
         pet_name: req.body.pet_name,
-        pet_level: 0,
+        pet_level: 1,
         experience_points: 0
     }
 

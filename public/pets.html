@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home</title>
+    <title>My Pets - Seville's Home</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -76,7 +76,7 @@
       </div>
     </nav>
     
-    <main class="py-4">
+    <main class="py-4 petsBody">
     <div class="container pb-4 petsCon">
         <h2 class="mb-4 p-3 text-center myPets" style="color: var(--secondary-color); font-weight: 700; border-radius: 15px;">
             My Pets &#10047; Collection
@@ -101,7 +101,7 @@
                     </div>
                     
                     <div class="col-md-7 p-4">
-                    <h3 id="equippedPetName" class="equipped-pet-name">No pet equipped!</h3>
+                    <h3 id="equippedPetName" class="equipped-pet-name">No Pet Equipped!</h3>
                     
                     <div class="row g-3 mt-2">
                         <div class="col-12">
@@ -123,19 +123,7 @@
                             <span 
                                 data-bs-toggle="tooltip" 
                                 data-bs-html="true"
-                                data-bs-title="
-                                Level up your equipped pet by gaining XP!<br><br>
-                                <strong>Pet Levels:</strong><br>
-                                <i>Level 1 - 0 XP<br>
-                                Level 2 - 100 XP<br>
-                                Level 3 - 300 XP<br>
-                                Level 4 - 600 XP<br>
-                                Level 5 - 1000 XP<br>
-                                Level 6 - 1500 XP<br>
-                                Level 7 - 2100 XP<br>
-                                Level 8 - 2800 XP<br>
-                                Level 9 - 3600 XP<br>
-                                Level 10 - 4500 XP</i>"
+                                data-bs-title="Level up your equipped pet and unlock awesome power-ups that shower you with bonus points!"
                                 style="cursor: help; font-size: 1.2rem;">&#128712;
                             </span>
                             </small>
@@ -150,7 +138,20 @@
                             <div>
                             <small class="stat-label">
                                 Experience Points
-                                <span data-bs-toggle="tooltip" data-bs-title="Your pet earns XP when you complete tasks while it’s equipped!" style="cursor: help; font-size: 1.2rem;">&#128712;</span>
+                                <span data-bs-toggle="tooltip" data-bs-html="true"
+                                    data-bs-title="Your pet earns XP & levels up when you complete tasks while it’s equipped! <br><br>
+                                        <strong>Pet Levels:</strong><br>
+                                        Level 1 - 0 XP<br>
+                                        Level 2 - 100 XP<br>
+                                        Level 3 - 300 XP<br>
+                                        Level 4 - 600 XP<br>
+                                        Level 5 - 1000 XP<br>
+                                        Level 6 - 1500 XP<br>
+                                        Level 7 - 2100 XP<br>
+                                        Level 8 - 2800 XP<br>
+                                        Level 9 - 3600 XP<br>
+                                        Level 10 - 4500 XP"
+                                    style="cursor: help; font-size: 1.2rem;">&#128712;</span>
                             </small>
                             <strong id="equippedPetExp" class="stat-value">-</strong>
                             </div>
@@ -175,6 +176,24 @@
             </div>
         </div>
         </div>
+    </div>
+
+    <!-- Edit Pet Name Modal -->
+    <div class="modal fade" id="editPetNameModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: white; border-radius: 16px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); border: 2px solid var(--border-color);">
+        <div class="modal-body p-4">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+            <form id="editPetNameForm">
+            <div class="mb-3">
+                <label for="newPetNameInput" class="form-label fw-bold" style="color: var(--text-dark);">Rename Your Pet</label>
+                <input type="text" class="form-control" id="newPetNameInput" required placeholder="Enter new name...">
+            </div>
+            <button type="submit" class="btn btn-secondary w-100">Save Name</button>
+            </form>
+        </div>
+        </div>
+    </div>
     </div>
 
     <!-- Toast Notification -->

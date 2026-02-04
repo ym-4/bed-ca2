@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('usernameDisplay').textContent = newUsername;
         document.getElementById('welcomeMessage').innerHTML = 
         `Welcome back, <span class="usernameGreet">${data.username}</span>! ★`;
-        
+
         editUsernameModal.hide();
       } else {
         showToast(data.message || 'Failed to update username', 'danger');
@@ -277,6 +277,9 @@ document.addEventListener("DOMContentLoaded", function () {
         showToast('Task created successfully!', 'success');
         document.getElementById('createTaskForm').reset();
         loadUserTasks(); 
+    
+      } else if (status === 400) {
+        showToast(data.message, 'danger');
         
       } else {
         showToast(data.message || 'Failed to create task', 'danger');
