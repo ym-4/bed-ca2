@@ -2,7 +2,7 @@
 
 **A Cozy Pet Corner - Wellness Challenge Gamification Platform**
 
-Seville's Home is a web application that gamifies wellness challenges by allowing users to adopt and raise virtual pets. Complete daily wellness tasks to earn points, adopt adorable pets, level them up, and unlock special abilities that boost your progress!
+Seville's Home is a web application that gamifies wellness challenges(or tasks) by allowing users to adopt and raise virtual pets. Complete daily wellness tasks to earn points, adopt adorable pets, level them up, and unlock special abilities that boost your progress!
 
 ---
 
@@ -29,7 +29,7 @@ Seville's Home combines wellness tracking with virtual pet adoption to create an
 - **Wellness Challenges**: Tasks created by users or the community (e.g., "Drink 2L of water", "Walk 5000 steps")
 - **Virtual Pets**: 7 unique pet breeds with different rarity levels and point costs
 - **Pet Leveling System**: Pets gain XP when equipped and level up (Level 1-10)
-- **Pet Abilities**: Unlock special powers at different levels that boost point rewards (10%-90% bonus)
+- **Pet Abilities**: Unlock special powers at different levels (1-5) that boost point rewards (10%-90% bonus)
 - **Community Features**: Leaderboards, reviews, and shared challenges
 
 ---
@@ -47,8 +47,8 @@ Seville's Home combines wellness tracking with virtual pet adoption to create an
 #### Wellness Challenges
 - Browse available community challenges
 - Create custom wellness tasks with point rewards (5-250 points)
-- Complete tasks once per 24 hours
-- Add comments/details to completions
+- Complete unique tasks once every 24 hours
+- Add comments to completions
 - Edit task comments after completion
 - View personal completion history
 - Delete owned challenges
@@ -76,7 +76,7 @@ Seville's Home combines wellness tracking with virtual pet adoption to create an
   - Level 3: Shell Melonpan Sanctuary (+50% points multiplier)
   - Level 4: Backflip Dango Burst (+70% points multiplier)
   - Level 5: Universal Cheer Taiyaki (+90% points multiplier)
-  - Abilities stack - highest unlocked ability applies
+  - Abilities stack - highest unlocked ability of equipped pet applies
 
 #### Community Features
 - **Leaderboard**: Top 5 users by total points earned
@@ -109,8 +109,6 @@ Seville's Home combines wellness tracking with virtual pet adoption to create an
 ### Development Tools
 - **nodemon** - Development server with auto-restart
 - **dotenv** - Environment variable management
-- **concurrently** - Run multiple npm scripts
-- **Jest** - Testing framework
 - **Supertest** - HTTP assertion library
 - **Playwright** - End-to-end testing
 
@@ -349,7 +347,9 @@ Run these commands in order:
 node src/configs/createSchema.js
 
 # Create tables and seed initial data
-node src/configs/initTables.js
+node src/configs/initTables.js 
+or
+npm run init_tables
 ```
 
 This will create:
@@ -424,7 +424,7 @@ http://localhost:3000
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
 | GET | `/api/pets` | Get all user pets | No |
-| GET | `/api/users/:id/pets` | Get user's pets | Yes |
+| GET | `/api/users/:id/pets` | Get a user's pets | Yes |
 | GET | `/api/pets/:userPetId` | Get pet by ID | Yes |
 | POST | `/api/users/:userId/adopt/pets/:breedId` | Adopt new pet | Yes |
 | PUT | `/api/users/:userId/pets/:userPetId` | Update pet info | Yes |
@@ -437,7 +437,7 @@ http://localhost:3000
 | GET | `/api/breeds` | Get all pet breeds | No |
 | GET | `/api/breeds/:id` | Get breed by ID | No |
 | GET | `/api/abilities` | Get all abilities | No |
-| GET | `/api/pets/:userPetId/abilities` | Get pet's abilities | Yes |
+| GET | `/api/pets/:userPetId/abilities` | Get a pet's abilities | Yes |
 | POST | `/api/users/:userId/unlock/pets/:userPetId/ability/:abilityId` | Unlock ability | Yes |
 
 ### Community
@@ -475,13 +475,13 @@ http://localhost:3000
 
 3. **Adopt Your First Pet**
    - Visit the Pet Shop
-   - Click "ENTER" on the Pet Shop building
-   - The Happy Hippo is free - adopt it!
+   - Click "ENTER" on the Pet Shop
+   - Adopt a pet of your choice!
    - Name your new companion
 
 4. **Equip Your Pet**
    - Go to "My Pets" from the navigation
-   - Click "Equip" on your Happy Hippo
+   - Click "Equip" on your new pet
    - Your pet will now gain XP when you complete tasks!
 
 5. **Level Up & Unlock Abilities**
@@ -505,7 +505,7 @@ When you have an equipped pet with unlocked abilities:
 - Your highest-level unlocked ability determines your bonus
 - Bonuses range from +10% to +90% extra points
 - Example: A task worth 100 points becomes 190 with max bonus!
-- Level up your pet and unlock all 5 abilities for maximum gains
+- Level up your pet and unlock all 5 abilities for maximum (+90%) gains
 
 ---
 
