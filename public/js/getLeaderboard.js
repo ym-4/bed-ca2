@@ -1,3 +1,4 @@
+// top 5 users
 document.addEventListener("DOMContentLoaded", function () {
   const callbackForLeaderboard = (responseStatus, responseData) => {
     console.log("responseStatus:", responseStatus);
@@ -49,8 +50,7 @@ const callbackForPetOfDay = (responseStatus, responseData) => {
     document.getElementById("petOfDayBreed").textContent = responseData.breed_name;
     document.getElementById("petOfDayImage").src = `http://localhost:3000/images/sprites/${responseData.breed_id}.png`;
   } else {
-    document.getElementById("petOfDayName").textContent = "No pet today!";
+    document.getElementById("petOfDayBreed").textContent = "No pet today!";
   }
 };
-
 fetchMethod(currentUrl + `/api/top-pet`, callbackForPetOfDay);

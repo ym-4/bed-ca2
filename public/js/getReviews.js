@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="stars-display-${review.id}" class="review-stars-display">
               ${stars}
             </div>
-            <!-- Star Rating Edit (hidden by default) -->
+            <!-- Star Rating Edit -->
             <div id="stars-edit-${review.id}" class="star-rating-edit" style="display: none;">
               ${createEditStarRating(review.id, review.review_amt)}
             </div>
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchMethod(currentUrl + `/api/review/${reviewId}`, (status, data) => {
       if (status === 200) {
         showToast('Review updated successfully!', 'success');
-        loadReviews(); // Reload all reviews
+        loadReviews();
       } else {
         showToast(data?.message || 'Failed to update review', 'danger');
       }

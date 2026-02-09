@@ -178,11 +178,9 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         (1, 1),
         (1, 2),
         (1, 3),
-        (1, 4),
         (2, 1),
         (2, 2),
         (3, 1),
-        (3, 2),
         (4, 1),
         (4, 2),
         (4, 3),
@@ -190,12 +188,9 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         (4, 5),
         (5, 1),
         (5, 2),
-        (5, 3),
         (6, 1),
         (6, 2),
-        (6, 3),
-        (7, 1),
-        (7, 2);
+        (7, 1);
 
         CREATE TABLE Reviews (
           id INT PRIMARY KEY AUTO_INCREMENT,

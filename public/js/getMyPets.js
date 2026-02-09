@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('toast').style.display = 'none';
   };
 
+
+
   // equipped pet
   function loadEquippedPet() {
     fetchMethod(currentUrl + `/api/users/${userId}`, (status, data) => {
@@ -56,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, "GET", null, token);
   }
+
+
 
   // all pets owned
   function loadAllPets() {
@@ -107,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <button class="btn btn-sm" style="background-color: #e2dac5;" onclick="editPetName(${pet.user_pet_id}, '${pet.pet_name}')">
                 Edit Name
               </button>
+
               ${!isEquipped ? `
                 <button class="btn btn-sm" style="background-color: rgb(144, 160, 121);" onclick="equipPet(${pet.user_pet_id})">
                   Equip
@@ -117,8 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 onclick="unequipPet()">
                 Unequip
                 </button>
-
               `}
+
               <button class="btn btn-sm btn-primary" style="color: white;" onclick="flipCard(${pet.user_pet_id})">
                 View Powers
               </button>
@@ -140,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
+
   // Flip card function
   window.flipCard = function(userPetId) {
     const card = document.getElementById(`card-${userPetId}`);
@@ -152,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.transform = 'rotateY(0deg)';
     }
   };
+
+
 
   // abilities
   function loadAbilities(userPetId) {
@@ -171,7 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "GET", null, token);
   }
 
-  // Edit pet name - updated to use modal
+
+  // Edit pet name modal
   window.editPetName = function(userPetId, currentName) {
     currentEditPetId = userPetId;
     document.getElementById('newPetNameInput').value = currentName;

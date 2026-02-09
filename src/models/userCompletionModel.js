@@ -62,16 +62,14 @@ module.exports.checkEquippedPet = (data, callback) =>
     pool.query(SQLSTATMENT, VALUES, callback);
 }
 
-// Add after existing functions in userCompletionModel.js
-
 module.exports.getEquippedPetBonus = (data, callback) =>
 {
    const SQLSTATMENT = `
     SELECT MAX(pa.ability_id) as highest_ability_id
-    FROM UserPetAbilities upa
-    JOIN User u ON u.equipped_pet_id = upa.user_pet_id
-    JOIN PetAbilities pa ON pa.ability_id = upa.ability_id
-    WHERE u.user_id = ?;
+    FROM UserPetAbilities upa, user u, PetAbilities pa
+    WHERE u.equipped_pet_id = upa.user_pet_id
+    AND pa.ability_id = upa.ability_id
+    AND u.user_id = ?;
     `;
     const VALUES = [data.user_id];
 

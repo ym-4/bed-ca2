@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (bonusStatus === 200 && bonusData.has_bonus) {
                 window.userPowerBonus = bonusData;
                 
-                // Show bonus indicator
+                // Show bonus activated
                 const bonusIndicator = document.createElement('div');
                 bonusIndicator.className = 'alert alert-info mb-4';
                 bonusIndicator.innerHTML = `
@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.hideToast = function() {
     document.getElementById('toast').style.display = 'none';
   };
+
+
 
   // Available Tasks
   const callbackForAvailableTasks = (responseStatus, responseData) => {
@@ -132,6 +134,8 @@ document.addEventListener("DOMContentLoaded", function () {
     container.innerHTML = html;
   };
 
+
+
   // Open complete task modal
   window.openCompleteTaskModal = function(challengeId) {
     currentChallengeId = challengeId;
@@ -143,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     completeTaskModal.show();
   };
 
-  // Handle complete task form submission
+  // complete task form submission
   document.getElementById('completeTaskForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -161,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // power bonus message
         if (responseData.powerBonus) {
-            toastMessage += ` ${responseData.powerBonus.message}`;
+            showToast(`Task completed with ${responseData.powerBonus.message}`, 'success');
         }
 
         if (responseData.leveledUp && responseData.levelUpMessage) {
@@ -188,6 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
+
+
   // Open edit comment modal
   window.openEditCommentModal = function(completionId) {
     currentCompletionId = completionId;
@@ -204,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
     editCommentModal.show();
   };
 
-  // Handle edit comment form submission
+  // edit comment form submission
   document.getElementById('editCommentForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -234,10 +240,12 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
+
+
   // available tasks
   fetchMethod(currentUrl + `/api/challenges`, callbackForAvailableTasks, "GET", null, token);
 
-  // get completed tasks if logged in
+  // get completed tasks only if logged in
   if (userId && token) {
     fetchMethod(currentUrl + `/api/challenges/users/${userId}`, callbackForCompletedTasks, "GET", null, token);
   } else {

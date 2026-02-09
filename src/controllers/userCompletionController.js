@@ -102,6 +102,7 @@ module.exports.checkEquippedPet = (req, res, next) =>
     userCompletionModel.checkEquippedPet(data, callback);
 }
 
+// check for power bonus activation
 module.exports.calculatePowerBonus = (req, res, next) =>
 {
     const data = {
@@ -135,7 +136,8 @@ module.exports.calculatePowerBonus = (req, res, next) =>
     userCompletionModel.getEquippedPetBonus(data, callback);
 }
 
-module.exports.applyPowerBonusToPoints = (req, res, next) =>
+
+module.exports.applyPowerBonusToPoints = (req, res, next) => 
 {
     const data = {
         challenge_id: req.params.id,

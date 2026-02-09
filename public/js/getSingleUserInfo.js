@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('toast').style.display = 'none';
   };
 
+
+
   // user profile information
   function loadUserProfile() {
     fetchMethod(currentUrl + `/api/users/${userId}`, (status, data) => {
@@ -104,6 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }, "DELETE", null, token);
   };
 
+
+
+  
   // Load user's created tasks
   function loadUserTasks() {
     fetchMethod(currentUrl + `/api/challenges/creator/${userId}`, (status, data) => {
@@ -197,15 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
         description: field === 'desc' ? newValue : display.textContent,
         points: field === 'points' ? parseInt(newValue) : parseInt(document.getElementById(`points-edit-${challengeId}`).value)
       };
-      
-      // If editing description, keep current points
-      if (field === 'desc') {
-        updateData.points = parseInt(document.getElementById(`points-display-${challengeId}`).textContent);
-      }
-      // If editing points, keep current description
-      if (field === 'points') {
-        updateData.description = document.getElementById(`desc-display-${challengeId}`).textContent;
-      }
       
       fetchMethod(currentUrl + `/api/challenges/${challengeId}`, (status, data) => {
         if (status === 200) {

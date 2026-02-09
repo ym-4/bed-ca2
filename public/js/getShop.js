@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
           const ownedBreedIds = (status === 200 && ownedPets)
             ? ownedPets.map(p => p.breed_id)
             : []; 
-          renderPets(responseData, ownedBreedIds);
+          renderPets(responseData, ownedBreedIds); // pets already owned
         }, "GET", null, token);
       } else {
-        renderPets(responseData, []);
+        renderPets(responseData, []); // no pets already owned
       }
     };
 
@@ -98,7 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const data = { pet_name: petName };
+    const data = { 
+      pet_name: petName 
+    };
 
     const callback = (responseStatus, responseData) => {
       if (responseStatus === 201 || responseStatus === 200) {
@@ -110,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (modal) modal.hide();
           location.reload();
         }, 1500);
+
       } else if (responseStatus === 400 && responseData.message && responseData.message.includes('points')) {
         namePetModal.hide();
         showToast('Not Enough Points', `You need ${currentBreedCost} points to adopt this pet. Complete more tasks to earn points!`, 'warning');
@@ -159,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Unlock Ability
   window.unlockAbility = function (abilityId, requiredLevel) {
+    
     // Fetch user data to get equipped_pet_id
     const userCallback = (responseStatus, responseData) => {
       if (responseStatus !== 200) {
@@ -204,12 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         fetchMethod(
-          currentUrl + `/api/users/${userId}/unlock/pets/${equippedPetId}/ability/${abilityId}`, 
-          unlockCallback, 
-          "POST", 
-          {}, 
-          token
-        );
+          currentUrl + `/api/users/${userId}/unlock/pets/${equippedPetId}/ability/${abilityId}`, unlockCallback, "POST", {}, token);
       };
 
       fetchMethod(currentUrl + `/api/pets/${equippedPetId}`, petCallback, "GET", null, token);
